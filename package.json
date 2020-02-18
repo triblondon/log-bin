@@ -1,0 +1,38 @@
+{
+  "main": "server/server.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack && node server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "sse-pubsub": "^1.1.1",
+    "nunjucks": "^3.1.4",
+    "express-nunjucks": "^2.2.3",
+    "human-readable-ids": "^1.0.4",
+    "body-parser": "^1.18.3",
+    "moment": "^2.22.2",
+    "string-to-color": "^2.0.1",
+    "color-contrast-calc": "^0.4.0",
+    "jsx-loader": "^0.13.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "webpack": "^4.27.0",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
+    "webpack-cli": "^3.1.2",
+    "redux-thunk": "^2.3.0"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
