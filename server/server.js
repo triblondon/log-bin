@@ -30,7 +30,8 @@ app.use((req, res, next) => {
     'X-XSS-Protection': "1",
     'X-Content-Type-Options': "nosniff",
     'Referer-Policy': "origin-when-cross-origin",
-    'Strict-Transport-Security': "max-age=86400"
+		'Strict-Transport-Security': "max-age=86400",
+		'X-Accel-Buffering': 'no' // Disables response buffering on Google App Engine (flex env)
   });
   next();
 })
@@ -65,14 +66,14 @@ app.post('/:bucketID', (req, res) => {
   req.body && req.body.split(/\n+/).filter(x => x && x.length).forEach(line => {
     const evt = new ParsedEvent(line);
     evt.parse();
-    
+
     channelManager.getChannel(req.params.bucketID).publish({
       time: evt.getTime(),
       raw: line,
       fields: evt.getFields(),
       parser: evt.getParserName()
     }, 'log');
-    
+
   });
   res.status(204);
   res.end();
@@ -80,6 +81,9 @@ app.post('/:bucketID', (req, res) => {
 
 // Allow this tool to be a log destination for Fastly's real time logging feature
 app.all('/.well-known/fastly/logging/challenge', (req, res) => res.end("*"));
+
+// Provide a healthcheck endpoint for Google App Engine
+app.get('/__health', (req, res) => res.end('OK'));
 
 
 app.listen(process.env.PORT, () => console.log('Server up'));

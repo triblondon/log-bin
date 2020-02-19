@@ -2,7 +2,8 @@
   "main": "server/server.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack && node server/server.js"
+		"start": "webpack && node server/server.js",
+		"deploy": "npm run build && gcloud beta app deploy"
   },
   "dependencies": {
     "express": "^4.16.4",
