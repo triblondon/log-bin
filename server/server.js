@@ -11,6 +11,10 @@ const ParsedEvent = require('./parsers/ParsedEvent');
 const MAX_SUBSCRIBERS_PER_STREAM = 10;
 const MIN_BUCKET_ID_LENGTH = 10;
 
+process.on('uncaughtException', (err) => console.log('Unhandled exception: ' + err));
+process.on('unhandledRejection', (err) => console.log('Unhandled promise rejection: ' + err));
+process.on('warning', (err) => console.log('Process warning: ' + err));
+
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.text({ type: "text/*", limit: 1024 }));
 app.use(bodyParser.text({ type: "application/json", limit: 1024 }));
