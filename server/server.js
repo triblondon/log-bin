@@ -1,7 +1,6 @@
 const path = require('path');
 
 const express = require('express');
-const expressNunjucks = require('express-nunjucks');
 const bodyParser = require('body-parser');
 const app = express();
 const hri = require('human-readable-ids').hri;
@@ -17,7 +16,6 @@ app.use(bodyParser.text({ type: "text/*", limit: 1024 }));
 app.use(bodyParser.text({ type: "application/json", limit: 1024 }));
 app.disable('x-powered-by');
 
-const njk = expressNunjucks(app, { watch:true });
 app.set('views', './views');
 
 app.disable('x-powered-by');
