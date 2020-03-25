@@ -38,6 +38,12 @@ app.use((req, res, next) => {
   next();
 })
 
+// Allow this tool to be a log destination for Fastly's real time logging feature
+app.all('/.well-known/fastly/logging/challenge', (req, res) => res.end("*"));
+
+// Provide a healthcheck endpoint for Google App Engine
+app.get('/__health', (req, res) => res.end('OK'));
+
 app.get('/', (req, res) => res.redirect('/' + hri.random()));
 
 app.get('/:bucketID', (req, res) => {
@@ -80,12 +86,5 @@ app.post('/:bucketID', (req, res) => {
   res.status(204);
   res.end();
 });
-
-// Allow this tool to be a log destination for Fastly's real time logging feature
-app.all('/.well-known/fastly/logging/challenge', (req, res) => res.end("*"));
-
-// Provide a healthcheck endpoint for Google App Engine
-app.get('/__health', (req, res) => res.end('OK'));
-
 
 app.listen(process.env.PORT, () => console.log('Server up'));
