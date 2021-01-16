@@ -16,15 +16,17 @@ process.on('unhandledRejection', (err) => console.log('Unhandled promise rejecti
 process.on('warning', (err) => console.log('Process warning: ' + err));
 
 // If the request does not contain a content type, make it text/plain
-app.use((req, res, next) => {
+app.use((req, resp, next) => {
   if (req.method === 'POST') {
     req.headers['content-type'] = req.headers['content-type'] || 'text/plain';
   }
+  resp.set({
+    "Access-Control-Allow-Origin": req.headers['origin'] || '*'
+  });
   next();
 });
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.text({ type: "*/*" }));
-app.disable('x-powered-by');
 
 app.set('views', './views');
 
