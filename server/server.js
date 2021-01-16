@@ -16,8 +16,8 @@ process.on('unhandledRejection', (err) => console.log('Unhandled promise rejecti
 process.on('warning', (err) => console.log('Process warning: ' + err));
 
 app.use(express.static(path.join(__dirname, '../client/public')));
-app.use(bodyParser.text({ type: "text/*", limit: 1024 }));
-app.use(bodyParser.text({ type: "application/json", limit: 1024 }));
+app.use(bodyParser.text({ type: "text/*", limit: 10240 }));
+app.use(bodyParser.text({ type: "application/json", limit: 10240 }));
 app.disable('x-powered-by');
 
 app.set('views', './views');
@@ -71,6 +71,7 @@ app.get('/:bucketID', (req, res) => {
 });
 
 app.post('/:bucketID', (req, res) => {
+  console.log(req.body);
   req.body && req.body.split(/\n+/).filter(x => x && x.length).forEach(line => {
     const evt = new ParsedEvent(line);
     evt.parse();
