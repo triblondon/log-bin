@@ -15,9 +15,15 @@ process.on('uncaughtException', (err) => console.log('Unhandled exception: ' + e
 process.on('unhandledRejection', (err) => console.log('Unhandled promise rejection: ' + err));
 process.on('warning', (err) => console.log('Process warning: ' + err));
 
+// If the request does not contain a content type, make it text/plain
+app.use((req, res, next) => {
+  if (req.method === 'POST') {
+    req.headers['content-type'] = req.headers['content-type'] || 'text/plain';
+  }
+  next();
+});
 app.use(express.static(path.join(__dirname, '../client/public')));
-app.use(bodyParser.text({ type: "text/*", limit: 10240 }));
-app.use(bodyParser.text({ type: "application/json", limit: 10240 }));
+app.use(bodyParser.text({ type: "*/*" }));
 app.disable('x-powered-by');
 
 app.set('views', './views');
@@ -71,7 +77,7 @@ app.get('/:bucketID', (req, res) => {
 });
 
 app.post('/:bucketID', (req, res) => {
-  console.log(req.body);
+  console.log(req.path, req.headers);
   req.body && req.body.split(/\n+/).filter(x => x && x.length).forEach(line => {
     const evt = new ParsedEvent(line);
     evt.parse();
