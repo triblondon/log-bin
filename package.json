@@ -12,7 +12,7 @@
     "express-nunjucks": "^2.2.5",
     "human-readable-ids": "^1.0.4",
     "jsx-loader": "^0.13.2",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "nunjucks": "^3.2.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
