@@ -8,7 +8,7 @@ const hri = require('human-readable-ids').hri;
 const channelManager = require('./channel-manager');
 const ParsedEvent = require('./parsers/ParsedEvent');
 
-const MAX_SUBSCRIBERS_PER_STREAM = 10;
+const MAX_SUBSCRIBERS_PER_STREAM = 30;
 const MIN_BUCKET_ID_LENGTH = 10;
 
 process.on('uncaughtException', (err) => console.log('Unhandled exception: ' + err));
