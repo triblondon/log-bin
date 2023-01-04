@@ -1,0 +1,5 @@
+dispatch:
+- url: "toppops.fastlylabs.com/*"
+  service: top-pops
+- url: "log-bin.fastly.dev/*"
+  service: log-bin
