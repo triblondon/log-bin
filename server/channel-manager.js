@@ -1,6 +1,6 @@
 const SSEChannel = require('sse-pubsub');
 
-const SSE_OPTIONS = { historySize: 0 };
+const SSE_OPTIONS = { historySize: 10 };
 const GC_INTERVAL = 5000;
 
 const channels = new Map();
